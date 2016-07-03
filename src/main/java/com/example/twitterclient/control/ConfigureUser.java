@@ -20,16 +20,16 @@ public class ConfigureUser {
     public ConfigureUser(String userName, Context context) {
         // get user preferences
         userPref = context.getSharedPreferences(userName, Context.MODE_PRIVATE);
-        userToken = userPref.getString("user_token", null);
-        userSecret = userPref.getString("user_secret", null);
+        userToken = userPref.getString(ConstVls.USER_TOKEN, null);
+        userSecret = userPref.getString(ConstVls.USER_SECRET, null);
     }
 
     public Long getSharedPrefUserId() {
-        return userPref.getLong("userID", 0);
+        return userPref.getLong(ConstVls.USER_ID, 0);
 
     }
     public String getSharedPrefUserScreen() {
-        return userPref.getString("screenName", null);
+        return userPref.getString(ConstVls.SCREEN_NAME, null);
 
     }
 
@@ -45,5 +45,4 @@ public class ConfigureUser {
 
         return TwitterObj;
 
-    }
-}
+    }}

@@ -19,18 +19,11 @@ import com.example.twitterclient.R;
  * Created by Eng-Karim on 7/3/2016.
  */
 public class ConnectionControl {
-    public class Connection_Control {
 
-        Activity context;
+        Context context;
 
-        // static Bitmap image = null;
-        // static String output=null;
-        // int i,j,k;
-        // public static String [] ret= new String[3];
-
-        public Connection_Control(Activity context) {
+        public ConnectionControl(Context context) {
             this.context = context;
-
         }
 
         public void showNoInternetConnectionMessage() {
@@ -53,12 +46,6 @@ public class ConnectionControl {
             pw.showAtLocation(view, Gravity.CENTER, 0, 0);
         }
 
-        public Bitmap getBitmap(byte[] bitmap) {
-            BitmapFactory.Options opt = new BitmapFactory.Options();
-            opt.inDither = true;
-
-            return BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length, opt);
-        }
 
         public boolean checkInternetConnection() {
             ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -72,4 +59,4 @@ public class ConnectionControl {
         }
 
     }
-}
+

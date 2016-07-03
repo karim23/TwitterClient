@@ -2,5 +2,9 @@
     <string name="app_name">TwitterClient</string>
     <string name="NoInternetConnection">No Internet Connection</string>
     <string name="ok">Ok</string>
+    <string name="welcome">Welcome</string>
+    <string name="please_wait">Please Wait...</string>
+    <string name="login_hint">You need to sign into Twitter to authorize the app</string>
+    <string name="signin">Login</string>
 
 </resources>
