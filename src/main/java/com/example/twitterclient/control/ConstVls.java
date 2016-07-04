@@ -16,6 +16,7 @@ public class ConstVls {
     public static final String USER_FULL_NAME = "userFullName";
     public static final String USER_PROFILE_IMG_URL = "userProfileImgURL";
     public static final String USER_PROFILE_BANNER_URL = "userProfileBannerUrl";
+    public static final String SQLITE_LOG = "DatabaseAdapter";
 
     // --------------
 }
