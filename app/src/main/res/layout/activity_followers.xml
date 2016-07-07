@@ -9,12 +9,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.twitterclient.ui.FollowersActivity">
 
-    <ListView
-        android:id="@+id/followerActivity_followersListLv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        tools:listitem="@layout/followers_list_row" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/channelFrag_swipToRefreshLo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:visibility="visible">
+
+        <ListView
+            android:id="@+id/followerActivity_followersListLv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            tools:listitem="@layout/followers_list_row" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

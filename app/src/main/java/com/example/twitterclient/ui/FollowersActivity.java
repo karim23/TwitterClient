@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -32,17 +33,31 @@ public class FollowersActivity extends AppCompatActivity {
     private ConfigureUser configureUser;
     private FollowersControl followersControl;
     private List<Follower> followersList;
+    private SwipeRefreshLayout swipeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followers);
         this.context = getApplicationContext();
-        FollwersUpdateReceiver follwersUpdateReceiver =new FollwersUpdateReceiver();
+        FollwersUpdateReceiver follwersUpdateReceiver = new FollwersUpdateReceiver();
         followersListLv = (ListView) findViewById(R.id.followerActivity_followersListLv);
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.channelFrag_swipToRefreshLo);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                new GetUserFollowers().execute(configureUserObj);
+            }
+        });
         followersControl = new FollowersControl(context);
         configureUser = new ConfigureUser(ConstVls.SHARED_PREF_NAME, getApplicationContext());
         this.configureUserObj = configureUser.getUserTwitterObj();
+        List<Follower> cachedFollowersList = followersControl.getFollowersByUserId(configureUser.getSharedPrefUserId());
+        if (!cachedFollowersList.isEmpty()) {
+            FollowersListAdapater followersListAdapater = new FollowersListAdapater(context, R.layout.followers_list_row, cachedFollowersList);
+            followersListLv.setAdapter(followersListAdapater);
+        }
         registerReceiver(follwersUpdateReceiver, new IntentFilter(ConstVls.FOLLOWERS_INTNT_FILTER));
         new GetUserFollowers().execute(configureUserObj);
 
@@ -54,6 +69,12 @@ public class FollowersActivity extends AppCompatActivity {
     }
 
     public class GetUserFollowers extends AsyncTask<Twitter, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            swipeLayout.setRefreshing(true);
+
+        }
 
         @Override
         protected Void doInBackground(Twitter... twitters) {
@@ -71,6 +92,8 @@ public class FollowersActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             followersList = followersControl.getFollewersList(followers);
             followersControl.addFollowers(followersList);
+            swipeLayout.setRefreshing(false);
+
 
         }
     }

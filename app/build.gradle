@@ -21,12 +21,12 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
     compile project(':twitter4j-async-4.0.2')
     compile project(':twitter4j-core-4.0.2')
     compile project(':twitter4j-stream-4.0.2')
     compile project(':twitter4j-media-support-4.0.2')
     compile project(':twitter4j-examples-4.0.2')
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
     compile 'com.squareup.picasso:picasso:2.5.2'
 }

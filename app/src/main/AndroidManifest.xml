@@ -16,6 +16,7 @@
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
@@ -26,9 +27,9 @@
 
                 <data android:scheme="twitterclient-android" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".ui.FollowersActivity"></activity>
+        <activity android:name=".ui.FollowersActivity" />
+        <activity android:name=".ui.FollowerTimeline"></activity>
     </application>
 
 </manifest>
