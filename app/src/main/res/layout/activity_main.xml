@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/startLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/twitter_blue_dark"
+    tools:context=".ui.MainActivity" >
+
+    <TextView
+        android:id="@+id/mainActivity_WelcomeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/startTv_twitterLike"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:text="@string/welcome"
+        android:textColor="@color/White"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/mainActivity_loginBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/twitter_lolo"
+        android:onClick="onClick"
+        android:text="@string/signin"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/mainActivity_loginHintTv"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainActivity_loginBtn"
+        android:layout_centerHorizontal="true"
+        android:text="@string/login_hint"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_gray"
+        android:visibility="invisible"/>
+
+    <ProgressBar
+        android:id="@+id/mainActivity_progressBar1Pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/startTv_twitterLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mainActivity_progressBar1Pb"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/White"
+        />
+
+    <TextView
+        android:id="@+id/mainActivity_pleaseWaitTv"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/startTv_twitterLike"
+        android:layout_below="@+id/mainActivity_progressBar1Pb"
+        android:paddingLeft="15dp"
+        android:text="@string/please_wait"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_gray"
+        android:visibility="visible" />
+
+</RelativeLayout>

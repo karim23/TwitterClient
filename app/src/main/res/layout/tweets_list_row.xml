@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/White"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="3dp">
+
+    <LinearLayout
+        android:id="@+id/tweetsListRow_rowData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/tweetsListRow_userImg"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/defult_prof_pic" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="7dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tweetsListRow_fullNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="CBC Egypt"
+                    android:textColor="@color/control_two"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tweetsListRow_userScreenTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:clickable="true"
+                    android:text="&apos;@&apos;CBC_EGY"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tweetsListRow_updateTimeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="6H"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tweetsListRow_updateTextTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:autoLink="all"
+                android:text="ext sample text sample text text sample teksample text sample text sample t tex sample tetx sample  "
+                android:textColor="@android:color/black"
+                android:textColorLink="@color/control_one" />
+
+            <ImageView
+                android:id="@+id/tweetsListRow_rowMediaIm"
+                android:layout_width="match_parent"
+                android:layout_height="117dp"
+                android:layout_marginRight="7dp"
+                android:background="@color/light_grey"
+                android:orientation="vertical"
+                android:visibility="gone"></ImageView>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
