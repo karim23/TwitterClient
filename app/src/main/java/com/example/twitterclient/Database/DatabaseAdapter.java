@@ -44,9 +44,8 @@ public class DatabaseAdapter {
 
 
     public synchronized long insert(String table, String[] fields, String[] values, String whereCause) {
-       // closeDataB();
-        long id = -1;
 
+        long id = -1;
         Cursor c = null;
         try {
             Log.v(TAG, "insert data into " + table);
@@ -56,9 +55,7 @@ public class DatabaseAdapter {
                 vals.put(fields[i], values[i]);
                 Log.v("" + fields[i], "" + values[i]);
             }
-
             db.insert(table, null, vals);
-
             String query = " Select " + whereCause + " from " + table + " order by " + whereCause + " DESC limit 1";
 
             c = db.rawQuery(query, null);
@@ -66,16 +63,11 @@ public class DatabaseAdapter {
                 id = c.getLong(0);
                 Log.v("query gadawal", "" + id);
             }
-
-
         } catch (Exception e) {
             Log.v("Gaawal insert fun   ", "" + e.getMessage() + e.toString());
             Log.e(TAG, e.toString());
-
         }
-
         c.close();
-
         return id;
     }
 
@@ -119,10 +111,10 @@ public class DatabaseAdapter {
         dbHelper.close();
     }
 
-    public List<Tweet> getTweetsByUserId(int followerId) {
+    public List<Tweet> getTweetsByUserId(Long userId) {
         Log.v(TABLE_TWEETS, " " + context.getString(R.string.table_loaded));
         List<Tweet> tweets = new ArrayList<>();
-        Cursor c = this.select(TABLE_TWEETS, false, "" + followerId, Tweet.COLUMN_USER_ID);
+        Cursor c = this.select(TABLE_TWEETS, false , "" + userId, "userId");
         tweets = setTweetsData(c);
         c.close();
         return tweets;
@@ -135,7 +127,7 @@ public class DatabaseAdapter {
                 Tweet temp = new Tweet();
                 temp.setId(c.getInt(c.getColumnIndex(Tweet.COLUMN_ID)));
                 temp.setUserId(c.getInt(c.getColumnIndex(Tweet.COLUMN_USER_ID)));
-                temp.setUpdateTime(c.getInt(c.getColumnIndex(Tweet.COLUMN_UPDATE_TIME)));
+                temp.setUpdateTime((long) c.getInt(c.getColumnIndex(Tweet.COLUMN_UPDATE_TIME)));
                 temp.setTweetText(c.getString(c.getColumnIndex(Tweet.COLUMN_TWEET_TEXT)));
                 temp.setUserScreen(c.getString(c.getColumnIndex(Tweet.COLUMN_USER_SCREEN)));
                 temp.setTweetName(c.getString(c.getColumnIndex(Tweet.COLUMN_TWEET_NAME)));
@@ -181,7 +173,7 @@ public class DatabaseAdapter {
             do {
                 Follower temp = new Follower();
                 temp.setId(c.getInt(c.getColumnIndex(Follower.COLUMN_ID)));
-                temp.setUserId(c.getInt(c.getColumnIndex(Follower.COLUMN_USER_ID)));
+                temp.setUserId(c.getLong(c.getColumnIndex(Follower.COLUMN_USER_ID)));
                 temp.setFullName(c.getString(c.getColumnIndex(Follower.COLUMN_FULL_NAME)));
                 temp.setUserScreen(c.getString(c.getColumnIndex(Follower.COLUMN_USER_SCREEN)));
                 temp.setUserImgUrl(c.getString(c.getColumnIndex(Follower.COLUMN_USER_IMG_URL)));
@@ -217,9 +209,11 @@ public class DatabaseAdapter {
 
     public void addTweets(List<Tweet> tweets) {
         for (int i = 0; i < tweets.size(); i++) {
-            insert(TABLE_FOLLOWERS, tweets.get(i).getFields(), tweets.get(i).getValues(),
+            insert(TABLE_TWEETS, tweets.get(i).getFields(), tweets.get(i).getValues(),
                     Follower.COLUMN_ID);
         }
+        context.sendBroadcast(new Intent(ConstVls.TIMELINE_INTNT_FILTER));
+
     }
 
 
@@ -230,17 +224,17 @@ public class DatabaseAdapter {
          */
 
         private static final String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "(" + User.COLUMN_ID
-                + " INTEGER NOT NULL PRIMARY KEY, " + User.COLUMN_USER_ID + " INTEGER, " + User.COLUMN_FULL_NAME + " TEXT, "
+                + " INTEGER NOT NULL PRIMARY KEY, " + User.COLUMN_USER_ID + " LONG, " + User.COLUMN_FULL_NAME + " TEXT, "
                 + User.COLUMN_USER_SCREEN + " TEXT, " + User.COLUMN_USER_IMG_URL + " TEXT, " + User.COLUMN_USER_BUNNER_URL + " TEXT, " + User.COLUMN_TOKEN_KEY
                 + " TEXT, " + User.COLUMN_TOKEN_SECRET + " TEXT " + ");";
 
         private static final String CREATE_FOLLWERS_TABLE = "CREATE TABLE " + TABLE_FOLLOWERS + "(" + Follower.COLUMN_ID
-                + " INTEGER NOT NULL PRIMARY KEY, " + Follower.COLUMN_USER_ID + " INTEGER UNIQUE, " + Follower.COLUMN_FULL_NAME + " TEXT, "
+                + " INTEGER NOT NULL PRIMARY KEY, " + Follower.COLUMN_USER_ID + " LONG UNIQUE, " + Follower.COLUMN_FULL_NAME + " TEXT, "
                 + Follower.COLUMN_USER_SCREEN + " TEXT, " + Follower.COLUMN_USER_IMG_URL + " TEXT, " + Follower.COLUMN_USER_BUNNER_URL
                 + " TEXT, " + Follower.COLUMN_BIO + " TEXT " + ");";
 
         private static final String CREATE_TWEETS_TABLE = "CREATE TABLE " + TABLE_TWEETS + "(" + Tweet.COLUMN_ID
-                + " INTEGER NOT NULL  PRIMARY KEY UNIQUE, " + Tweet.COLUMN_USER_ID + " INTEGER , " + Tweet.COLUMN_UPDATE_TIME + " INTEGER ,"
+                + " INTEGER NOT NULL  PRIMARY KEY UNIQUE, " + Tweet.COLUMN_USER_ID + " LONG , " + Tweet.COLUMN_UPDATE_TIME + " INTEGER ,"
                 + Tweet.COLUMN_TWEET_TEXT + " TEXT ," + Tweet.COLUMN_USER_SCREEN + " TEXT," + Tweet.COLUMN_TWEET_NAME + " TEXT ," + Tweet.COLUMN_USER_IMG + " TEXT ,"
                 + Tweet.COLUMN_TWEET_MEDIA_URL + " TEXT);";
 

@@ -46,25 +46,26 @@ public class TweetsListAdapter extends ArrayAdapter<Tweet> {
             convertView = LayoutInflater.from(this.getContext())
                     .inflate(R.layout.tweets_list_row, parent, false);
             viewHolder = new ViewHolder();
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-
             viewHolder.fullNameTv = (TextView) convertView.findViewById(R.id.tweetsListRow_fullNameTv);
             viewHolder.userScreenTv = (TextView) convertView.findViewById(R.id.tweetsListRow_userScreenTv);
             viewHolder.updateTextTv = (TextView) convertView.findViewById(R.id.tweetsListRow_updateTextTv);
             viewHolder.updateTimeTv = (TextView) convertView.findViewById(R.id.tweetsListRow_updateTimeTv);
             viewHolder.userImg = (ImageView) convertView.findViewById(R.id.tweetsListRow_userImg);
             viewHolder.rowMediaIm = (ImageView) convertView.findViewById(R.id.tweetsListRow_rowMediaIm);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+
+
 
         }
 
         Tweet item = getItem(position);
-        if (item != null) {
+        if (item != null && !isEmpty()) {
             viewHolder.fullNameTv.setText(item.getTweetName());
             viewHolder.userScreenTv.setText(item.getUserScreen());
             viewHolder.updateTextTv.setText(item.getTweetText());
-            viewHolder.updateTimeTv.setText(item.getUpdateTime());
+            viewHolder.updateTimeTv.setText(item.getUpdateTime() + "");
             if (item.getUserImg() != null && item.getUserImg() != "")
                 Picasso.with(getContext()).load(item.getUserImg()).into(viewHolder.userImg);
             if (item.getTweetMediaURL() != null && item.getTweetMediaURL() != "") {

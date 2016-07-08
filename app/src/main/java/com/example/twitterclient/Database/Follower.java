@@ -5,7 +5,7 @@ package com.example.twitterclient.Database;
  */
 public class Follower {
     private int id;
-    private int userId;
+    private Long userId;
     private String fullName;
     private String userScreen;
     private String userImgUrl;
@@ -39,11 +39,11 @@ public class Follower {
         this.id = id;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

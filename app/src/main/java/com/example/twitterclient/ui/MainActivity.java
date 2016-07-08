@@ -15,10 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.twitterclient.R;
-import com.example.twitterclient.control.ConfigureUser;
 import com.example.twitterclient.control.ConnectionControl;
 import com.example.twitterclient.control.ConstVls;
-import com.example.twitterclient.ui.FollowersActivity;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
         loginBtn = (Button) findViewById(R.id.mainActivity_loginBtn);
         loginHintTv =(TextView)findViewById(R.id.mainActivity_loginHintTv);
         pleaseWaitTv =(TextView)findViewById(R.id.mainActivity_pleaseWaitTv);

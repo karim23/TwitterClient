@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.twitterclient.Database.DatabaseAdapter;
 import com.example.twitterclient.Database.Follower;
+import com.example.twitterclient.Database.Tweet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class FollowersControl {
         for (int i = 0; i < followersParse.size(); i++) {
             User item = followersParse.get(i);
             Follower temp = new Follower();
-            temp.setUserId((int) item.getId());
+            temp.setUserId(item.getId());
             temp.setFullName(item.getName());
             temp.setUserBunnerUrl(item.getProfileBannerURL());
             temp.setUserScreen(item.getScreenName());

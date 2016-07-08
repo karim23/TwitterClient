@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/followerTimeline_topBackGround"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/default_banner"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/followerTimeline_userProfile"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/defult_prof_pic" />
+
+        <Button
+            android:id="@+id/followerTimeline_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Karim Abdell Salam"
+            android:textColor="@color/White"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/followerTimeline_swipToRefreshLo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:visibility="visible">
+
+        <ListView
+            android:id="@+id/followerTimeline_tweetsListLv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            tools:listitem="@layout/follower_tweet_row" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

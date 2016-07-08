@@ -1,6 +1,7 @@
 package com.example.twitterclient.control;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 
 /**
  * Created by Eng-Karim on 7/3/2016.
@@ -20,6 +21,9 @@ public class ConstVls {
     public static final String USER_PROFILE_BANNER_URL = "userProfileBannerUrl";
     public static final String SQLITE_LOG = "DatabaseAdapter";
     public static final String FOLLOWERS_INTNT_FILTER = "followers_intent_filter";
+    public static final String FOLLOWER_ID = "followerId";
+    public static final int NUMBER_OF_TWEETS = 10;
+    public static final String TIMELINE_INTNT_FILTER = "timeline_intent_filter";
 
     // --------------
 }

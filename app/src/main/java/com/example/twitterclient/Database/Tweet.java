@@ -6,7 +6,7 @@ package com.example.twitterclient.Database;
 public class Tweet {
     private int id;
     private int userId;
-    private int updateTime;
+    private Long updateTime;
     private String tweetText;
     private String userScreen;
     private String tweetName;
@@ -47,11 +47,11 @@ public class Tweet {
         this.userId = userId;
     }
 
-    public int getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(int updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 
