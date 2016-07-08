@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.twitterclient.Database.Follower;
@@ -18,6 +19,7 @@ import com.example.twitterclient.Database.Tweet;
 import com.example.twitterclient.R;
 import com.example.twitterclient.adapters.FollowersListAdapater;
 import com.example.twitterclient.control.ConfigureUser;
+import com.example.twitterclient.control.ConnectionControl;
 import com.example.twitterclient.control.ConstVls;
 import com.example.twitterclient.control.FollowersControl;
 import com.example.twitterclient.control.TimelineControl;
@@ -43,13 +45,14 @@ public class FollowersActivity extends AppCompatActivity {
     private FollowersControl followerControl;
     private ProgressDialog progressDialog;
     private TimelineUpdateReceiver follwersUpdateReceiver;
+    private ConnectionControl connectionControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.followers);
         this.context = getApplicationContext();
-
+        connectionControl = new ConnectionControl(context);
         follwersUpdateReceiver = new TimelineUpdateReceiver();
         followersListLv = (ListView) findViewById(R.id.followerActivity_followersListLv);
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.channelFrag_swipToRefreshLo);
@@ -85,8 +88,10 @@ public class FollowersActivity extends AppCompatActivity {
             FollowersListAdapater followersListAdapater = new FollowersListAdapater(context, R.layout.followers_list_row, cachedFollowersList);
             followersListLv.setAdapter(followersListAdapater);
         }
-        new GetUserFollowers().execute(configureUserObj);
-
+        if (connectionControl.checkInternetConnection())
+            new GetUserFollowers().execute(configureUserObj);
+        else
+            connectionControl.showNoInternetConnectionMessage();
 //        followersControl.getFollewersList(followers);
 
 //        followersControl.addFollowers(followers);

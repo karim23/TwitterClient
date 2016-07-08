@@ -25,6 +25,7 @@ import com.example.twitterclient.Database.Tweet;
 import com.example.twitterclient.R;
 import com.example.twitterclient.adapters.TweetsListAdapter;
 import com.example.twitterclient.control.ConfigureUser;
+import com.example.twitterclient.control.ConnectionControl;
 import com.example.twitterclient.control.ConstVls;
 import com.example.twitterclient.control.TimelineControl;
 import com.squareup.picasso.Picasso;
@@ -59,13 +60,14 @@ public class FollowerTimeline extends AppCompatActivity {
     private String userScreen;
     private String userBunnnerImg;
     private String userImg;
+    private ConnectionControl connectionControl;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = getApplicationContext();
-
+        connectionControl = new ConnectionControl(context);
         setContentView(R.layout.followers_timeline);
 
         if (getIntent() != null && getIntent().hasExtra(ConstVls.FOLLOWER_ID)) {
@@ -133,7 +135,10 @@ public class FollowerTimeline extends AppCompatActivity {
             TweetsListAdapter tweetsListAdapter = new TweetsListAdapter(context, R.layout.tweets_list_row, cachedtweets);
             tweetsListLv.setAdapter(tweetsListAdapter);
         }
-        new GetFollowerTimeline().execute(configureUserObj);
+        if (connectionControl.checkInternetConnection())
+            new GetFollowerTimeline().execute(configureUserObj);
+        else
+            connectionControl.showNoInternetConnectionMessage();
 
 //        followersControl.getFollewersList(followers);
 
