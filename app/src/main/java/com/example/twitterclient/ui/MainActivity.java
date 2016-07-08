@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.mainActivity_loginBtn);
         loginHintTv =(TextView)findViewById(R.id.mainActivity_loginHintTv);
         pleaseWaitTv =(TextView)findViewById(R.id.mainActivity_pleaseWaitTv);
-
         progressBar1Pb =(ProgressBar) findViewById(R.id.mainActivity_progressBar1Pb);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent1 = new Intent(context, FollowersActivity.class);
                         startActivity(intent1);
+                        finish();
                     } catch (TwitterException e) {
                         Log.e(LOG_TAG, "Failed to get access token: " + e.getMessage());
                     }
@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Intent followersActivity = new Intent(context, FollowersActivity.class);
             startActivity(followersActivity);
+
+            finish();
         }
     }
 
