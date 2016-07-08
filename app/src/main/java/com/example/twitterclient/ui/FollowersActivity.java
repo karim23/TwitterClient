@@ -67,19 +67,18 @@ public class FollowersActivity extends AppCompatActivity {
         followerControl = new FollowersControl(context);
         configureUser = new ConfigureUser(ConstVls.SHARED_PREF_NAME, getApplicationContext());
         this.configureUserObj = configureUser.getUserTwitterObj();
-        List<Follower> cachedFollowersList = followerControl.getFollowersByUserId(configureUser.getSharedPrefUserId());
+        final List<Follower> cachedFollowersList = followerControl.getFollowersByUserId(configureUser.getSharedPrefUserId());
         followersListLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Start the follower timeline activity
-                if (!followersList.isEmpty()) {
+                if (!followersList.isEmpty() || !cachedFollowersList.isEmpty()) {
                     Intent intent = new Intent(context, FollowerTimeline.class);
                     intent.putExtra(ConstVls.FOLLOWER_ID, followersList.get(position).getUserId());
                     intent.putExtra(ConstVls.USER_FULL_NAME, followersList.get(position).getFullName());
                     intent.putExtra(ConstVls.SCREEN_NAME, followersList.get(position).getUserScreen());
                     intent.putExtra(ConstVls.USER_PROFILE_BANNER_URL, followersList.get(position).getUserBunnerUrl());
                     intent.putExtra(ConstVls.USER_PROFILE_IMG_URL, followersList.get(position).getUserImgUrl());
-
                     startActivity(intent);
                 }
             }
