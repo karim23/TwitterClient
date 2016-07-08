@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import twitter4j.MediaEntity;
 import twitter4j.PagableResponseList;
 import twitter4j.ResponseList;
 import twitter4j.Status;
@@ -42,6 +43,9 @@ public class TimelineControl {
             temp.setUserId((int) item.getId());
             temp.setTweetName(item.getUser().getName());
             // temp.setTweetMediaURL(item.getUserMentionEntities());
+            for (MediaEntity entity : item.getMediaEntities()) {
+                temp.setTweetMediaURL(entity.getMediaURL());
+            }
             temp.setUserScreen(item.getUser().getScreenName());
             temp.setTweetText(item.getText());
             temp.setUserImg(item.getUser().getProfileImageURL());

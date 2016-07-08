@@ -1,5 +1,6 @@
 package com.example.twitterclient.ui;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import com.example.twitterclient.control.TimelineControl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import twitter4j.PagableResponseList;
 import twitter4j.Twitter;
@@ -39,13 +41,16 @@ public class FollowersActivity extends AppCompatActivity {
     private List<Follower> followersList;
     private SwipeRefreshLayout swipeLayout;
     private FollowersControl followerControl;
+    private ProgressDialog progressDialog;
+    private TimelineUpdateReceiver follwersUpdateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.followers);
         this.context = getApplicationContext();
-        TimelineUpdateReceiver follwersUpdateReceiver = new TimelineUpdateReceiver();
+
+        follwersUpdateReceiver = new TimelineUpdateReceiver();
         followersListLv = (ListView) findViewById(R.id.followerActivity_followersListLv);
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.channelFrag_swipToRefreshLo);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -67,6 +72,11 @@ public class FollowersActivity extends AppCompatActivity {
                 if (!followersList.isEmpty()) {
                     Intent intent = new Intent(context, FollowerTimeline.class);
                     intent.putExtra(ConstVls.FOLLOWER_ID, followersList.get(position).getUserId());
+                    intent.putExtra(ConstVls.USER_FULL_NAME, followersList.get(position).getFullName());
+                    intent.putExtra(ConstVls.SCREEN_NAME, followersList.get(position).getUserScreen());
+                    intent.putExtra(ConstVls.USER_PROFILE_BANNER_URL, followersList.get(position).getUserBunnerUrl());
+                    intent.putExtra(ConstVls.USER_PROFILE_IMG_URL, followersList.get(position).getUserImgUrl());
+
                     startActivity(intent);
                 }
             }
@@ -75,7 +85,6 @@ public class FollowersActivity extends AppCompatActivity {
             FollowersListAdapater followersListAdapater = new FollowersListAdapater(context, R.layout.followers_list_row, cachedFollowersList);
             followersListLv.setAdapter(followersListAdapater);
         }
-        registerReceiver(follwersUpdateReceiver, new IntentFilter(ConstVls.FOLLOWERS_INTNT_FILTER));
         new GetUserFollowers().execute(configureUserObj);
 
 //        followersControl.getFollewersList(followers);
@@ -90,6 +99,7 @@ public class FollowersActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             swipeLayout.setRefreshing(true);
+            registerReceiver(follwersUpdateReceiver, new IntentFilter(ConstVls.FOLLOWERS_INTNT_FILTER));
 
         }
 
@@ -107,8 +117,10 @@ public class FollowersActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            followersList = followerControl.getFollewersList(followers);
-            followerControl.addFollowers(followersList);
+            if (followers != null) {
+                followersList = followerControl.getFollewersList(followers);
+                followerControl.addFollowers(followersList);
+            }
             swipeLayout.setRefreshing(false);
 
 

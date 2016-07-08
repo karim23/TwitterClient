@@ -7,5 +7,6 @@
     <string name="login_hint">You need to sign into Twitter to authorize the app</string>
     <string name="signin">Login</string>
     <string name="table_loaded">Table Loaded</string>
+    <string name="loading">Loading...</string>
 
 </resources>
