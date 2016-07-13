@@ -6,10 +6,10 @@ android {
     defaultConfig {
         applicationId "com.example.twitterclient"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -21,13 +21,13 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':twitter4j-async-4.0.2')
-    compile project(':twitter4j-core-4.0.2')
-    compile project(':twitter4j-stream-4.0.2')
-    compile project(':twitter4j-media-support-4.0.2')
-    compile project(':twitter4j-examples-4.0.2')
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
+    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.google.android.gms:play-services:9.0.2'
+    compile 'org.twitter4j:twitter4j-core:4.0.4'
+    compile 'org.twitter4j:twitter4j-async:4.0.4'
+    compile 'org.twitter4j:twitter4j-examples:4.0.4'
+    compile 'org.twitter4j:twitter4j-media-support:4.0.4'
+    compile 'org.twitter4j:twitter4j-stream:4.0.4'
+    compile 'com.android.support:support-annotations:23.0.0'
 }

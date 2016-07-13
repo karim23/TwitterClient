@@ -28,6 +28,7 @@ import com.example.twitterclient.control.ConfigureUser;
 import com.example.twitterclient.control.ConnectionControl;
 import com.example.twitterclient.control.ConstVls;
 import com.example.twitterclient.control.TimelineControl;
+import com.google.firebase.auth.TwitterAuthCredential;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
